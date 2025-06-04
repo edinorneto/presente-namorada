@@ -1,0 +1,47 @@
+# Projeto - Presente pra namorada
+
+buques = [
+    "Tradicional - 6 rosas", 
+    "Tradicional - 12 rosas", 
+    "Luxo - 6 rosas", 
+    "Luxo - 12 rosas", 
+    "Mix", 
+    "Flores do Campo"
+]
+precos = [120, 200, 180, 280, 200, 150]
+
+catalogo = [
+    "Tradicional - 6 rosas: R$120,00",
+    "Tradicional - 12 rosas: R$200,00",
+    "Luxo - 6 rosas: R$180,00",
+    "Luxo - 12 rosas: R$280,00",
+    "Mix: R$200,00",
+    "Flores do Campo: R$150,00"
+]
+
+print("\nCatálogo de Flores:")
+for item in catalogo:
+    print(f" - {item}")
+
+while True:
+    try:
+        filtro_valor = float(input('\nDigite o valor máximo que deseja gastar: R$ '))
+        if filtro_valor < 0:
+            print('Por favor, digite um valor positivo.')
+            continue
+        break
+    except ValueError:
+        print('Valor inválido! Por favor, digite um número.\n')
+
+dentro_orcamento = [
+    f"{buque} - R$ {preco:.2f}" 
+    for buque, preco in zip(buques, precos) 
+    if preco <= filtro_valor
+]
+
+if dentro_orcamento:
+    print(f"\nProdutos dentro do seu orçamento de R$ {filtro_valor:.2f}:")
+    for produto in dentro_orcamento:
+        print(f" - {produto}")
+else:
+    print(f"\nNenhum produto encontrado dentro do orçamento de R$ {filtro_valor:.2f}.")
