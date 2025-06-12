@@ -1,27 +1,24 @@
-# Projeto - Presente pra namorada
+#Presente-namorada
 
-buques = [
-    "Tradicional - 6 rosas", 
-    "Tradicional - 12 rosas", 
-    "Luxo - 6 rosas", 
-    "Luxo - 12 rosas", 
-    "Mix", 
-    "Flores do Campo"
-]
-precos = [120, 200, 180, 280, 200, 150]
+class Buque:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self.preco = preco
+    def __repr__(self):
+        return f"{self.nome} - R$ {self.preco:.2f}"
 
 catalogo = [
-    "Tradicional - 6 rosas: R$120,00",
-    "Tradicional - 12 rosas: R$200,00",
-    "Luxo - 6 rosas: R$180,00",
-    "Luxo - 12 rosas: R$280,00",
-    "Mix: R$200,00",
-    "Flores do Campo: R$150,00"
+    Buque("Tradicional - 6 rosas", 120),
+    Buque("Tradicional - 12 rosas", 200),
+    Buque("Luxo - 6 rosas", 180),
+    Buque("Luxo - 12 rosas", 280),
+    Buque("Mix", 200),
+    Buque("Flores do Campo", 150)
 ]
 
 print("\nCatálogo de Flores:")
 for item in catalogo:
-    print(f" - {item}")
+    print(f" - {item}") 
 
 while True:
     try:
@@ -34,9 +31,7 @@ while True:
         print('Valor inválido! Por favor, digite um número.\n')
 
 dentro_orcamento = [
-    f"{buque} - R$ {preco:.2f}" 
-    for buque, preco in zip(buques, precos) 
-    if preco <= filtro_valor
+    item for item in catalogo if item.preco <= filtro_valor
 ]
 
 if dentro_orcamento:
@@ -45,3 +40,8 @@ if dentro_orcamento:
         print(f" - {produto}")
 else:
     print(f"\nNenhum produto encontrado dentro do orçamento de R$ {filtro_valor:.2f}.")
+
+with open('buques.txt', 'w', encoding='utf-8') as arquivo:
+  arquivo.write(f'Dentro do seu orçamento de R$ {filtro_valor:.2f}, estão os seguintes produtos: ')
+  for produto in dentro_orcamento:
+    arquivo.write(f'\n - {produto}')
